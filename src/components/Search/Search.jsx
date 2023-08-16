@@ -16,7 +16,9 @@ function Search({setPosition}) {
     }, [loc, setPosition])
     
     return (
-        <form>
+        <form onSubmit={(e) => {
+            e.preventDefault()
+        }}>
             <input className = {styles.search} type= "search" value={search} onChange={handleSearch} placeholder='search places'/>
         </form>
     )
