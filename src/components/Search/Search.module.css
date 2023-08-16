@@ -1,0 +1,18 @@
+.search {
+    position: absolute;
+    width: 220px;
+    height: 45px;
+    z-index: 1000;
+    font-size: 1.7rem;
+    font-weight:550;
+    color:black;
+    top: 2rem;
+    right: 68%;
+    transform: translateX(-50%);
+    background-color: var(--color-light--3);
+}
+.search:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px #007bff;
+}

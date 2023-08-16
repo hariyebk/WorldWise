@@ -1,0 +1,64 @@
+{
+  "cities": [
+    {
+      "cityName": "Arba Minch",
+      "country": "Ethiopia",
+      "emoji": "🇪🇹",
+      "date": "2023-08-15T06:46:10.706Z",
+      "notes": "Enjoyable",
+      "position": {
+        "lat": 5.909317917096274,
+        "lng": 37.62622381876122
+      },
+      "id": 98443199
+    },
+    {
+      "cityName": "Nairobi",
+      "country": "Kenya",
+      "emoji": "🇰🇪",
+      "date": "2023-08-15T06:47:04.784Z",
+      "notes": "good",
+      "position": {
+        "lat": -1.357588730927504,
+        "lng": 36.84169749263804
+      },
+      "id": 98443200
+    },
+    {
+      "cityName": "Asmara",
+      "country": "Eritrea",
+      "emoji": "🇪🇷",
+      "date": "2023-08-15T06:48:40.940Z",
+      "notes": "wonderfull",
+      "position": {
+        "lat": 15.296957226493449,
+        "lng": 38.95157961581624
+      },
+      "id": 98443201
+    },
+    {
+      "cityName": "Madrid",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2023-08-15T16:39:53.970Z",
+      "notes": "nice",
+      "position": {
+        "lat": 40.38594445196789,
+        "lng": -3.6781382027570935
+      },
+      "id": 98443202
+    },
+    {
+      "cityName": "Moscow",
+      "country": "Russian Federation (the)",
+      "emoji": "🇷🇺",
+      "date": "2023-08-16T04:23:01.127Z",
+      "notes": "awsome",
+      "position": {
+        "lat": 55.73767263470714,
+        "lng": 37.644188457399146
+      },
+      "id": 98443203
+    }
+  ]
+}
