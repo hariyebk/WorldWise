@@ -1,5 +1,5 @@
 import { useNavigate} from 'react-router-dom'
-import styles from './map.module.css'
+import styles from './Map.module.css'
 import {useEffect, useState} from "react"
 import Search from '../Search/Search'
 import { useCities } from '../../contexts/CityProvider'
