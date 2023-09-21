@@ -1,4 +1,3 @@
-import {Link } from "react-router-dom"
 import Sidebar from "../components/Sidebar/Sidebar"
 import Map from "../components/Map/Map"
 import styles from './AppLayout.module.css'

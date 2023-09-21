@@ -1,5 +1,7 @@
 import { useContext, useReducer } from "react"
 import {useEffect, createContext } from "react"
+import supabase from "../services/supabase"
+import toast from "react-hot-toast"
 
 const cityContext = createContext()
 const BASE_URL = `http://localhost:8000`
@@ -17,6 +19,11 @@ const reducer = (state, action) => {
                 ...state,
                 isLoading: true
             }
+        case "setcurrentcitytonull":
+            return{
+                ...state,
+                currentCity: null
+            }
         case "error":
             return {
                 ...state,
@@ -33,13 +40,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 isLoading: false,
-                cities: action.payload
-            }
-        case "delete city":
-            return {
-                ...state,
-                isLoading: false,
-                cities: action.payload
+                cities: action.payload,
             }
         default:
             throw new Error("unkown action type")
@@ -52,9 +53,9 @@ function CityProvider({children}) {
         const fetchdata = async () => {
             try{
             dispatch({type: "isLoading"})
-            const res = await fetch(`${BASE_URL}/cities`)
-            const data = await res.json()
-            dispatch({type: "create new city", payload: data})
+            const { data: cities, error } = await supabase.from('cities').select('*')
+            if(error) throw new Error(error)
+            dispatch({type: "create new city", payload: cities})
             }
             catch(err){
                 dispatch({type: "error"})
@@ -63,29 +64,15 @@ function CityProvider({children}) {
         fetchdata()
     }, [])
 
-    const getCityData = async (id) => {
-        try{
-            dispatch({type: "isLoading"})
-            const res = await fetch(`${BASE_URL}/cities/${id}`)
-            const data = await res.json()
-            dispatch({type: "currentCity", payload: data})
-        }
-        catch(err){
-            dispatch({type: "error", payload: err.message})
-        }
-    }
     const createNewCity = async (newCity) => {
         try{
             dispatch({type: "isLoading"})
-            const res = await fetch(`${BASE_URL}/cities`, {
-                method: "POST",
-                body: JSON.stringify(newCity),
-                headers: {
-                "Content-Type": "application/json"
-                }
-            })
-            const data = await res.json()
-            dispatch({type: "create new city", payload:  [...cities, data]})
+            const {error: error1 } = await supabase.from('cities').insert(newCity).select()
+            if(error1) throw new Error(error1)
+            const { data: cities, error: error2} = await supabase.from('cities').select('*')
+            if(error2) throw new Error(error2)
+            dispatch({type: "create new city", payload: cities})
+            toast.success(`${newCity?.cityName} added to your list`)
         }
         catch(err){
             dispatch({type: "error", payload: err.message})
@@ -94,10 +81,11 @@ function CityProvider({children}) {
     const deleteCity = async (id) => {
         try{
             dispatch({type: "isLoading"})
-            await fetch(`${BASE_URL}/cities/${id}`, {
-                method: "DELETE"
-            })
-            dispatch({type: "delete city", payload: cities.filter(city => city.id !== id)})
+            await supabase.from('cities').delete().eq('id', id)
+            const { data: cities, error } = await supabase.from('cities').select('*')
+            if(error) throw new Error(error)
+            dispatch({type: "create new city", payload: cities})
+            toast.success(`city #${id} deleted from your list`)
         }
         catch(err){
             dispatch({type: "error"})
@@ -108,8 +96,8 @@ function CityProvider({children}) {
         <cityContext.Provider value = {{
             cities,
             isLoading,
+            dispatch,
             currentCity,
-            getCityData,
             createNewCity,
             deleteCity
         }}>

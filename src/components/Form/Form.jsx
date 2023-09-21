@@ -56,11 +56,12 @@ function Form() {
   const handleSubmit =  async (e) => {
     e.preventDefault()
     if(!cityName || !date) return
+    setIsLoading(true)
     const newCity = {
       cityName,
       country,
       emoji,
-      date,
+      date: date.toISOString(),
       notes,
       position: {
         lat: +lat,
@@ -68,6 +69,7 @@ function Form() {
       },
     }
     await createNewCity(newCity)
+    setIsLoading(false)
     navigate("/app/cities")
   }
   useEffect(function(){
