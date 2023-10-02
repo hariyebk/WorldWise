@@ -7,7 +7,7 @@ function Sidebar() {
         <div className= {styles.sidebar}>
             <Logo />
             <AppNav />
-            <Outlet />
+            <Outlet  className = {styles.outlet}/>
             <footer className= {styles.footer}>
                 <p className= {styles.copyright}>
                     &copy; Copyright &nbsp; {new Date().getFullYear()} &nbsp; By Harun.B
